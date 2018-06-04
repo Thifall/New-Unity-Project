@@ -1,41 +1,47 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+using Assets.Scripts.Utility;
+using System;
 using UnityEngine;
+using UnityStandardAssets.Characters.ThirdPerson;
 
+[RequireComponent(typeof(ThirdPersonCharacter))]
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField]
-    float MovementSpeed = 1;
-    [SerializeField]
-    float RotationSpeed = 1;
-    // Use this for initialization
-    void Start()
-    {
+    ThirdPersonCharacter m_Character;   // A reference to the ThirdPersonCharacter on the object
+    CameraRaycaster cameraRaycaster;
+    Vector3 currentClickTarget;
 
+    private void Start()
+    {
+        cameraRaycaster = Camera.main.GetComponentInParent<CameraRaycaster>();
+        m_Character = GetComponent<ThirdPersonCharacter>();
+        currentClickTarget = transform.position;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
+    // Fixed update is called in sync with physics
     private void FixedUpdate()
     {
-        var forwardMove = Input.GetAxis("Vertical") * (MovementSpeed / 10);
-        var rotation = Input.GetAxis("Horizontal") * (RotationSpeed);
-        MovePlayer(forwardMove);
-        RotatePlayer(rotation);
-    }
+        if (Input.GetMouseButton(0))
+        {
+            switch (cameraRaycaster.layerHit)
+            {
+                case Layer.Walkable:
+                    currentClickTarget = cameraRaycaster.hit.point;  // So not set in default case
+                    break;
+                case Layer.Enemy:
+                    print("enemy hit");
+                    break;
+                case Layer.RaycastEndStop:
+                default:
+                    break;
+            }
+        }
 
-    private void RotatePlayer(float rotation)
-    {
-        this.transform.Rotate(0, rotation, 0);
-    }
+        var toMove = currentClickTarget - transform.position;
+        if (toMove.magnitude > 0.5)
+        {
+            m_Character.Move(currentClickTarget - transform.position, false, false);
+        }
 
-    private void MovePlayer(float forwardMove)
-    {
-        this.transform.Translate(0, 0, forwardMove, Space.Self);
     }
 }
+
