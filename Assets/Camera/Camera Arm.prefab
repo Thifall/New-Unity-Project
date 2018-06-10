@@ -53,7 +53,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1778288074759894}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 2.9115028, y: -0.03999996, z: -2.061824}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4874617285536670}
@@ -140,6 +140,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 799869ed8cb53594b84864d738c70fbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  WalkableCursor: {fileID: 2800000, guid: 0f05556afd6f79448b83acad48761998, type: 3}
+  HostileTargetCursor: {fileID: 2800000, guid: 7752a3796ae9c0347aeb67b014b6b7cb, type: 3}
+  UnknownCursor: {fileID: 2800000, guid: bb9bc7054bed3b8499b41be06159a37c, type: 3}
+  XOffset: 20
+  Yoffset: 20
 --- !u!114 &114594378762665918
 MonoBehaviour:
   m_ObjectHideFlags: 1
