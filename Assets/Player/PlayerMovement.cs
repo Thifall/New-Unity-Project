@@ -20,6 +20,12 @@ public class PlayerMovement : MonoBehaviour
     // Fixed update is called in sync with physics
     private void FixedUpdate()
     {
+        ProcessRaycastingState();
+        ProcessCharacterMovement();
+    }
+
+    private void ProcessRaycastingState()
+    {
         if (Input.GetMouseButton(0))
         {
             switch (cameraRaycaster.layerHit)
@@ -35,13 +41,20 @@ public class PlayerMovement : MonoBehaviour
                     break;
             }
         }
+    }
 
+    private void ProcessCharacterMovement()
+    {
         var toMove = currentClickTarget - transform.position;
-        if (toMove.magnitude > 0.5)
+        if (toMove.magnitude >= 0.5f)
         {
-            m_Character.Move(currentClickTarget - transform.position, false, false);
+            print("moving");
+            m_Character.Move(toMove, false, false);
         }
-
+        else
+        {
+            m_Character.Move(Vector3.zero, false, false);
+        }
     }
 }
 
