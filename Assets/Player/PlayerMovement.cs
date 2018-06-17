@@ -34,7 +34,6 @@ public class PlayerMovement : MonoBehaviour
                     currentClickTarget = cameraRaycaster.hit.point;  // So not set in default case
                     break;
                 case Layer.Enemy:
-                    print("enemy hit");
                     break;
                 case Layer.RaycastEndStop:
                 default:

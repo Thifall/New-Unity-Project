@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.Utility;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,6 +10,7 @@ public class CursorAffordance : MonoBehaviour
     [SerializeField] Texture2D WalkableCursor = null;
     [SerializeField] Texture2D HostileTargetCursor = null;
     [SerializeField] Texture2D UnknownCursor = null;
+    [SerializeField] Texture2D InteractableCursour = null;
     [SerializeField] float XOffset;
     [SerializeField] float Yoffset;
     // Use this for initialization
@@ -27,6 +29,9 @@ public class CursorAffordance : MonoBehaviour
                 break;
             case Assets.Scripts.Utility.Layer.Enemy:
                 Cursor.SetCursor(HostileTargetCursor, new Vector2(XOffset, Yoffset), CursorMode.Auto);
+                break;
+            case Layer.Interactable:
+                Cursor.SetCursor(InteractableCursour, new Vector2(XOffset, Yoffset), CursorMode.Auto);
                 break;
             case Assets.Scripts.Utility.Layer.RaycastEndStop:
                 Cursor.SetCursor(UnknownCursor, new Vector2(XOffset, Yoffset), CursorMode.Auto);
